@@ -1,1 +1,53 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Whintr Studios</title>
+<meta name="description" content="Contact Nate Whintr at Whintr Studios with questions about games or projects. Send a message using the form.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=Source+Sans+3:wght@400;700&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+<a href="index.html" class="logo"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M3 30c6-1 10-4 12-9 2-7 6-13 14-17-1 7-3 12-6 15 3 0 6 1 8 3-5 2-9 2-12 2-5 4-10 6-16 6z" fill="#F2B84B"/></svg><span>Whintr Studios</span></a>
+<nav aria-label="Main navigation">
+<button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-list">&#9776;</button>
+<ul id="nav-list"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="ProjectNews.html">Project News</a></li><li><a href="gallery.html">Projects</a></li><li><a href="contact.html" aria-current="page">Contact</a></li></ul>
+</nav>
+</header>
+<main id="main">
+<h1>Contact Whintr Studios</h1>
+<!-- TODO: replace placeholder email below with Nate's real contact details. -->
+<p>Send a message with the form, or email <a href="mailto:contact@example.com">contact@example.com</a> (placeholder).</p>
+<h2>Send a message</h2>
+<form id="contact-form" novalidate>
+<label for="name">Your name</label>
+<input id="name" name="name" type="text" autocomplete="name" aria-describedby="name-error" required>
+<p class="error" id="name-error" aria-live="polite"></p>
+<label for="email">Your email</label>
+<input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error" required>
+<p class="error" id="email-error" aria-live="polite"></p>
+<label for="message">Your message</label>
+<textarea id="message" name="message" rows="6" aria-describedby="message-error" required></textarea>
+<p class="error" id="message-error" aria-live="polite"></p>
+<button class="button" type="submit">Send message</button>
+</form>
+<p class="success" id="form-success" role="status" hidden></p>
+</main>
+<footer>
+<nav aria-label="Footer navigation"><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="ProjectNews.html">Project News</a></li><li><a href="gallery.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+<!-- TODO: replace these placeholder social links with Nate's real profiles. -->
+<ul aria-label="Social links">
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://itch.io/" target="_blank" rel="noopener">itch.io</a></li>
+<li><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a></li>
+</ul>
+<p>&copy; 2026 Whintr Studios. All rights reserved.</p>
+</footer>
+<script src="js/script.js"></script>
+</body>
+</html>
