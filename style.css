@@ -9,7 +9,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .skip:focus{left:1rem;top:1rem;z-index:10}
 header{background:var(--navy);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1.25rem}
 .logo{display:flex;align-items:center;gap:.6rem;color:#fff;font-family:Sora,Arial,sans-serif;font-weight:700;font-size:1.25rem;text-decoration:none;min-height:48px}
-.logo svg{width:36px;height:36px}
+.logo img{width:48px;height:48px;background:#fff;border-radius:50%;padding:3px;object-fit:contain}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;flex-wrap:wrap}
 nav a{display:flex;align-items:center;min-height:48px;padding:0 .9rem;color:#fff;text-decoration:none;border-bottom:3px solid transparent}
 nav a:hover,nav a[aria-current=page]{border-bottom-color:var(--amber)}
@@ -44,3 +44,20 @@ nav ul.open{display:flex}
 nav a{border-bottom:1px solid #1f4062}
 }
 @media(prefers-reduced-motion:no-preference){.button{transition:background .15s}}
+h1{text-align:center}
+.hero{text-align:center}.hero p{margin-left:auto;margin-right:auto}
+.cta{text-align:center}
+.media{display:flex;align-items:center;gap:1.5rem;margin:1.5rem 0}
+.media figure{flex:0 0 150px;margin:0}
+.media img{display:block;width:150px;height:auto;max-width:100%;border-radius:8px}
+.media h2{margin-top:0}
+.media>div>:first-child{margin-top:0}
+.media-right{flex-direction:row-reverse}
+.banner{margin:0 0 1.5rem}
+.banner img{display:block;width:100%;height:auto;max-height:220px;object-fit:cover;border-radius:8px}
+.banner figcaption{font-size:1rem;color:#4a5f70;text-align:center;margin-top:.4rem}
+@media(max-width:700px){
+.media,.media-right{flex-direction:column;text-align:center}
+.media figure{flex:none}
+.media img{width:120px;margin:0 auto}
+}
