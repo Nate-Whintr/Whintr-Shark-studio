@@ -105,15 +105,6 @@
       return;
     }
 
-    // Demo mode: be honest that nothing was actually sent
-    if (FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
-      successMessage.textContent =
-        'Demo only: your details were valid, but no message was actually sent.';
-      form.reset();
-      return;
-    }
-
-    // Real submission
     submitButton.disabled = true;
 
     fetch(FORM_ENDPOINT, {
