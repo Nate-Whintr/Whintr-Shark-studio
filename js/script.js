@@ -36,7 +36,7 @@
   if (!form) return;
 
 
-  var FORM_ENDPOINT = 'https://formspree.io/f/mrpekloa;
+  var FORM_ENDPOINT = 'https://formspree.io/f/mrpekloa';
 
   var successMessage = document.getElementById('form-success');
   var formError = document.getElementById('form-error');
