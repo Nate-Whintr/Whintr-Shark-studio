@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  /* ---------- Mobile menu ---------- */
+  /*  Mobile menu  */
   var menuToggle = document.querySelector('.menu-toggle');
   var navList = document.getElementById('nav-list');
 
@@ -17,12 +17,10 @@
       setMenu(!navList.classList.contains('open'));
     });
 
-    // Close the menu when a link is chosen
     navList.addEventListener('click', function (event) {
       if (event.target.closest('a')) setMenu(false);
     });
 
-    // Close the menu with the Escape key and return focus to the toggle
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && navList.classList.contains('open')) {
         setMenu(false);
@@ -31,7 +29,7 @@
     });
   }
 
-  /* ---------- Contact form ---------- */
+  /*  Contact form  */
   var form = document.getElementById('contact-form');
   if (!form) return;
 
@@ -58,7 +56,6 @@
     }
   };
 
-  // Validate one field, show or clear its error, return true if valid
   function validateField(input) {
     var errorText = rules[input.name](input.value);
     document.getElementById(input.name + '-error').textContent = errorText;
@@ -71,8 +68,6 @@
     formError.textContent = '';
   }
 
-  // Errors appear on submit, then update live as the user fixes them.
-  // Any new typing also clears an old success or failure message.
   Object.keys(rules).forEach(function (fieldName) {
     var input = form.elements[fieldName];
 
@@ -88,7 +83,6 @@
     event.preventDefault();
     clearStatusMessages();
 
-    // Validate every field and remember the first invalid one
     var allValid = true;
     var firstInvalid = null;
 
