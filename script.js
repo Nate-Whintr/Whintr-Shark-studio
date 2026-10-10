@@ -1,22 +1,138 @@
-(function(){
-var t=document.querySelector('.menu-toggle'),l=document.getElementById('nav-list');
-if(t&&l){t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o);});}
-var f=document.getElementById('contact-form');
-if(!f)return;
-var rules={name:function(v){return v.trim().length>=2?'':'Enter your name (at least 2 characters).';},
-email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)?'':'Enter a valid email address, like name@example.com.';},
-message:function(v){return v.trim().length>=10?'':'Enter a message of at least 10 characters.';}};
-function check(el){var m=rules[el.name](el.value);
-document.getElementById(el.name+'-error').textContent=m;
-el.setAttribute('aria-invalid',m?'true':'false');return !m;}
-Object.keys(rules).forEach(function(n){var el=f.elements[n];
-el.addEventListener('blur',function(){check(el);});
-el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')check(el);});});
-f.addEventListener('submit',function(e){e.preventDefault();
-var ok=true,first=null,s=document.getElementById('form-success');
-Object.keys(rules).forEach(function(n){var el=f.elements[n];if(!check(el)){ok=false;if(!first)first=el;}});
-if(!ok){s.hidden=true;first.focus();return;}
-// TODO: send the data to a real service (e.g. Formspree) instead of only confirming it here.
-s.textContent='Thanks, '+f.elements.name.value.trim()+'! Your message was received. Expect a reply at '+f.elements.email.value.trim()+'.';
-s.hidden=false;f.reset();});
+(function () {
+  'use strict';
+
+  /* ---------- Mobile menu ---------- */
+  var menuToggle = document.querySelector('.menu-toggle');
+  var navList = document.getElementById('nav-list');
+
+  if (menuToggle && navList) {
+    menuToggle.setAttribute('aria-expanded', 'false');
+
+    function setMenu(open) {
+      navList.classList.toggle('open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+    }
+
+    menuToggle.addEventListener('click', function () {
+      setMenu(!navList.classList.contains('open'));
+    });
+
+    // Close the menu when a link is chosen
+    navList.addEventListener('click', function (event) {
+      if (event.target.closest('a')) setMenu(false);
+    });
+
+    // Close the menu with the Escape key and return focus to the toggle
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && navList.classList.contains('open')) {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+  }
+
+  /* ---------- Contact form ---------- */
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  // Replace with your real endpoint (e.g. a Formspree form URL).
+  // While it still contains YOUR_FORM_ID, the form runs in demo mode.
+  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  var successMessage = document.getElementById('form-success');
+  var formError = document.getElementById('form-error');
+  var submitButton = form.querySelector('button[type="submit"]');
+
+  var rules = {
+    name: function (value) {
+      return value.trim().length > 0 ? '' : 'Enter your name.';
+    },
+    email: function (value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+        ? ''
+        : 'Enter a valid email address, like name@example.com.';
+    },
+    message: function (value) {
+      return value.trim().length >= 10
+        ? ''
+        : 'Enter a message of at least 10 characters.';
+    }
+  };
+
+  // Validate one field, show or clear its error, return true if valid
+  function validateField(input) {
+    var errorText = rules[input.name](input.value);
+    document.getElementById(input.name + '-error').textContent = errorText;
+    input.setAttribute('aria-invalid', errorText ? 'true' : 'false');
+    return errorText === '';
+  }
+
+  function clearStatusMessages() {
+    successMessage.textContent = '';
+    formError.textContent = '';
+  }
+
+  // Errors appear on submit, then update live as the user fixes them.
+  // Any new typing also clears an old success or failure message.
+  Object.keys(rules).forEach(function (fieldName) {
+    var input = form.elements[fieldName];
+
+    input.addEventListener('input', function () {
+      clearStatusMessages();
+      if (input.getAttribute('aria-invalid') === 'true') {
+        validateField(input);
+      }
+    });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearStatusMessages();
+
+    // Validate every field and remember the first invalid one
+    var allValid = true;
+    var firstInvalid = null;
+
+    Object.keys(rules).forEach(function (fieldName) {
+      var input = form.elements[fieldName];
+      if (!validateField(input)) {
+        allValid = false;
+        if (!firstInvalid) firstInvalid = input;
+      }
+    });
+
+    if (!allValid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    // Demo mode: be honest that nothing was actually sent
+    if (FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
+      successMessage.textContent =
+        'Demo only: your details were valid, but no message was actually sent.';
+      form.reset();
+      return;
+    }
+
+    // Real submission
+    submitButton.disabled = true;
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form)
+    })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Request failed');
+        successMessage.textContent = 'Thanks! Your message was sent.';
+        form.reset();
+      })
+      .catch(function () {
+        formError.textContent =
+          'Sorry, something went wrong sending your message. Please try again.';
+      })
+      .finally(function () {
+        submitButton.disabled = false;
+      });
+  });
 })();
