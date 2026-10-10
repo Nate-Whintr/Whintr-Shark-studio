@@ -35,9 +35,8 @@
   var form = document.getElementById('contact-form');
   if (!form) return;
 
-  // Replace with your real endpoint (e.g. a Formspree form URL).
-  // While it still contains YOUR_FORM_ID, the form runs in demo mode.
-  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  var FORM_ENDPOINT = 'https://formspree.io/f/mrpekloa;
 
   var successMessage = document.getElementById('form-success');
   var formError = document.getElementById('form-error');
