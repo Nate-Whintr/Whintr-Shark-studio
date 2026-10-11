@@ -109,6 +109,7 @@
       .then(function (response) {
         if (!response.ok) throw new Error('Request failed');
         successMessage.textContent = 'Thanks! Your message was sent.';
+        success.hidden = false;
         form.reset();
       })
       .catch(function () {
