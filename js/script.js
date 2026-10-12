@@ -65,6 +65,7 @@
 
   function clearStatusMessages() {
     successMessage.textContent = '';
+    successMessage.hidden = true;
     formError.textContent = '';
   }
 
